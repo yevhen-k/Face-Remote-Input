@@ -1,22 +1,9 @@
 import os
 import dlib
-import numpy as np
 import cv2
 
 from face_processing import *
 
-
-
-def landmark_to_np(shape, dtype="int"):
-    # initialize the list of (x, y)-coordinates
-    coords = np.zeros((shape.num_parts, 2), dtype=dtype)
-
-    # loop over all facial landmarks and convert them
-    # to a 2-tuple of (x, y)-coordinates
-    for i in range(0, shape.num_parts):
-        coords[i] = (shape.part(i).x, shape.part(i).y)
-    # return the list of (x, y)-coordinates
-    return coords
 
 def main():
         
@@ -49,11 +36,15 @@ def main():
 
             mr = mouth_ratio(landmarks_np)
             mo = is_mouth_opened(landmarks_np)
+            up_down = up_down_direction(landmarks_np)
+            left_right = left_right_direction(landmarks_np)
             cv2.putText(frame, 'mouth ratio = {}'.format(mr), (10,40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
             cv2.putText(frame, 'mouth opened = {}'.format(mo), (10,80), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
-            
+            cv2.putText(frame, 'up/down direction = {}'.format(up_down), (10,120), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+            cv2.putText(frame, 'left/right direction = {}'.format(left_right), (10,160), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+
             for idx, (x, y) in enumerate(landmarks_np):
-                if idx in LEFT_EYE or idx in RIGHT_EYE or idx in NOSE_BRIDGE or idx in LIPS:
+                if idx in [36,39,27,30,42,45]:
                     cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
                 else:
                     cv2.circle(frame, (x, y), 1, (0, 255, 0), -1)
