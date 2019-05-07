@@ -6,5 +6,6 @@ lib/
 .vscode/
 videos/
 #models/
+__pycache__/
 
 tests/
