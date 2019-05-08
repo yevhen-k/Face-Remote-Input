@@ -1,0 +1,12 @@
+cmake==3.13.3
+dlib==19.17.0
+numpy==1.16.3
+opencv-contrib-python==4.1.0.25
+Pillow==6.0.0
+PyAutoGUI==0.9.42
+pyee==6.0.0
+PyGetWindow==0.0.4
+PyMsgBox==1.0.6
+PyRect==0.1.4
+PyScreeze==0.1.20
+PyTweening==1.0.3
